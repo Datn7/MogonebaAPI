@@ -13,7 +13,7 @@ namespace MogonebaAPI
                 options.AddPolicy("AllowAngularClient", policy =>
                 {
                     policy
-                        .WithOrigins("http://localhost:4200", "http://localhost:4000")
+                        .AllowAnyOrigin()
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                 });
@@ -35,7 +35,7 @@ namespace MogonebaAPI
                 app.MapOpenApi();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
