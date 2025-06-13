@@ -7,6 +7,18 @@ namespace MogonebaAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Add CORS policy
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAngularClient", policy =>
+                {
+                    policy
+                        .WithOrigins("http://localhost:4200", "http://localhost:4000")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
             // Add services to the container.
 
             builder.Services.AddControllers();
@@ -14,6 +26,8 @@ namespace MogonebaAPI
             builder.Services.AddOpenApi();
 
             var app = builder.Build();
+
+            app.UseCors("AllowAngularClient");
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
