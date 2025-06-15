@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MogonebaAPI.Data;
 using MogonebaAPI.Models;
 
@@ -30,6 +31,13 @@ namespace MogonebaAPI.Controllers
             _context.Memories.Add(memory);
             await _context.SaveChangesAsync();
             return Ok(memory);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetMemories()
+        {
+            var memories = await _context.Memories.ToListAsync();
+            return Ok(memories);
         }
     }
 
