@@ -11,5 +11,6 @@ namespace MogonebaAPI.Data
         }
 
         public DbSet<User> Users => Set<User>();
+        public DbSet<Memory> Memories { get; set; }
     }
 }
