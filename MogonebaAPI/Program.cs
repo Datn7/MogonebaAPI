@@ -48,6 +48,7 @@ namespace MogonebaAPI
 
             app.UseAuthorization();
 
+            app.UseStaticFiles();
 
             app.MapControllers();
 
