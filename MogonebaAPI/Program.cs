@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using MogonebaAPI.Data;
+
 namespace MogonebaAPI
 {
     public class Program
@@ -6,6 +9,10 @@ namespace MogonebaAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            // Add DB context
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             // Add CORS policy
             builder.Services.AddCors(options =>
@@ -24,6 +31,8 @@ namespace MogonebaAPI
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+
+
 
             var app = builder.Build();
 
